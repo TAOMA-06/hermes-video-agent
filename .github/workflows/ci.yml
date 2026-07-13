@@ -39,4 +39,6 @@ jobs:
       - name: Run plugin integration test
         run: |
           cd "$RUNNER_TEMP/hermes-agent"
-          scripts/run_tests.sh "$GITHUB_WORKSPACE/tests/test_hermes_video_agent.py"
+          scripts/run_tests.sh \
+            "$GITHUB_WORKSPACE/tests/test_hermes_video_agent.py" \
+            -- --rootdir "$GITHUB_WORKSPACE"
