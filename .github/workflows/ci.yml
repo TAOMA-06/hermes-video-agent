@@ -30,6 +30,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+      - name: Prepare package-safe plugin test source
+        run: |
+          set -o pipefail
+          mkdir -p "$RUNNER_TEMP/plugin-source/hermes_video_agent"
+          git -C "$GITHUB_WORKSPACE" archive HEAD | tar -x -C "$RUNNER_TEMP/plugin-source/hermes_video_agent"
       - name: Prepare Hermes test environment
         run: |
           git clone --depth 1 https://github.com/NousResearch/hermes-agent.git "$RUNNER_TEMP/hermes-agent"
@@ -40,5 +45,5 @@ jobs:
         run: |
           cd "$RUNNER_TEMP/hermes-agent"
           scripts/run_tests.sh \
-            "$GITHUB_WORKSPACE/tests/test_hermes_video_agent.py" \
-            -- --rootdir "$GITHUB_WORKSPACE"
+            "$RUNNER_TEMP/plugin-source/hermes_video_agent/tests/test_hermes_video_agent.py" \
+            -- --rootdir "$RUNNER_TEMP/plugin-source/hermes_video_agent"
