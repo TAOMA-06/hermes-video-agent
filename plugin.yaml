@@ -1,0 +1,19 @@
+name: hermes_video_agent
+version: 0.1.0
+description: "Evidence-based local video rough-cut workflow: inspect media, create storyboard evidence, transcribe audio, plan an editable timeline with Hermes's active multimodal model, and render an approved preview."
+author: taoma
+kind: standalone
+platforms:
+  - linux
+  - macos
+provides_tools:
+  - video_inspect
+  - video_create_proxy
+  - video_extract_storyboard
+  - video_transcribe
+  - video_draft_edit
+  - video_validate_timeline
+  - video_render_preview
+  - video_export_timeline
+hooks:
+  - pre_tool_call

@@ -1,0 +1,24 @@
+# Merge this into the active Hermes profile's config.yaml.
+# Keep credentials in Hermes's standard auth flow or ~/.hermes/.env, never here.
+
+plugins:
+  enabled:
+    - hermes_video_agent
+  entries:
+    hermes_video_agent:
+      # Required. The plugin accepts only files inside this directory.
+      workspace_root: /absolute/path/to/your/video-workspace
+
+      # Optional safety and cost bounds.
+      max_storyboard_frames: 8
+      planner_timeout_seconds: 120
+      planner_max_tokens: 2600
+
+# Optional: use Hermes's built-in xAI/Grok STT provider for audio transcription.
+# The plugin calls the normal Hermes STT route, so local, Groq, OpenAI, xAI,
+# Mistral, and other configured providers remain possible.
+stt:
+  enabled: true
+  provider: xai
+  xai:
+    language: zh
